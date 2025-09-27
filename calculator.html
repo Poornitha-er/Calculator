@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #f4f4f9;
+    }
+    .calculator {
+      background: #fff;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0px 4px 15px rgba(0,0,0,0.2);
+      width: 280px;
+    }
+    #display {
+      width: 100%;
+      height: 50px;
+      margin-bottom: 15px;
+      font-size: 1.3em;
+      text-align: right;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+    button {
+      padding: 15px;
+      font-size: 1.1em;
+      border: none;
+      border-radius: 8px;
+      background: #007bff;
+      color: #fff;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <input type="text" id="display" disabled>
+    <div class="buttons">
+      <button>7</button>
+      <button>8</button>
+      <button>9</button>
+      <button>/</button>
+      <button>4</button>
+      <button>5</button>
+      <button>6</button>
+      <button>*</button>
+      <button>1</button>
+      <button>2</button>
+      <button>3</button>
+      <button>-</button>
+      <button>0</button>
+      <button>.</button>
+      <button>=</button>
+      <button>+</button>
+      <button>⌫</button>
+    </div>
+  </div>
+
+  <script>
+    let display = document.getElementById("display");
+    let buttons = document.querySelectorAll("button");
+
+    const calculate = () => {
+      try {
+        display.value = eval(display.value);
+      } catch (error) {
+        alert("Invalid Expression!");
+        display.value = "";
+      }
+    };
+
+    buttons.forEach(btn => {
+      btn.addEventListener("click", e => {
+        let value = e.target.innerText;
+        if (value === "=") {
+          calculate();
+        } else if (value === "⌫") {
+          display.value = display.value.slice(0, -1);
+        } else {
+          display.value += value;
+        }
+      });
+    });
+  </script>
+</body>
+</html>
